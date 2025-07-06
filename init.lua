@@ -21,6 +21,14 @@ vim.o.number = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
 
+-- Prevent cursor from reverting to block
+vim.cmd [[
+  au VimEnter,VimResume * set guicursor=i-c-ci-ve:hor25,n-v-sm:block25,r-cr:hor20,o:hor50
+    \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+    \,sm:block25-blinkwait175-blinkoff150-blinkon175
+  au VimLeave * set guicursor=a:hor25-blinkon1
+ ]]
+
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
 
@@ -796,10 +804,10 @@ require('lazy').setup({
     config = function()
       -- Set your preferred material style: 'darker', 'lighter', 'oceanic', 'palenight', 'deep ocean'
       vim.g.material_style = 'deep ocean'
-      require('material').setup({
+      require('material').setup {
         -- Minimal config, see :help material.nvim for more options
         -- You can add plugin integrations or style overrides here
-      })
+      }
       vim.cmd.colorscheme 'material'
     end,
   },
